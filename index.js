@@ -6,7 +6,7 @@ import { connect, Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import JSONTree from 'react-json-tree';
 import './style.css';
-
+import List from './components/List';
 /** 
  * example valid zipcodes
  * 93455
@@ -23,29 +23,6 @@ import './style.css';
 //   .then(res => res.json())
 //   .then(res => console.log(res.places[0]))
 
-const removeDuplicates = (myArr, prop) => {
-  return myArr.filter((obj, pos, arr) => {
-    return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
-  });
-}
-
-const List = ({ zip = [], setValue, selected }) => {
-  // TODO remove duplicates
-  const uniqueStates = removeDuplicates(zip, 'code');
-  
-  return (
-    <ul>
-      {
-        uniqueStates.map(({code, state, name}) => (
-          <li 
-          key={code} 
-          onClick={(e) => setValue(code, e)}
-          className={ selected ===  code ? 'item selected' : 'item'}>{name}, {state}</li>
-        ))
-      }
-    </ul>
-  )
-}
 
 class App extends React.Component {
   state = { value: '' };
