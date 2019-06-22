@@ -5,7 +5,6 @@ import store from './store';
 import './style.css';
 import Form from './components/Form';
 import List from './components/List';
-import JSONTree from 'react-json-tree';
 
 /**
  * example valid zipcodes
@@ -28,7 +27,6 @@ class App extends React.Component {
     const { zip } = this.props;
     return (
       <div>
-        <JSONTree data={this.props} />
         <Form />
         {<List zip={zip} />}
       </div>
