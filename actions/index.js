@@ -10,9 +10,7 @@ export const fetchData = zip => {
     return fetch(api)
       .then(response => response.json())
       .then(json => {
-        console.log(json)
         const cutedData = transformData(json);
-        console.log(cutedData)
         return dispatch(addZip(cutedData))
       })
       .then(() => dispatch(fetchRequest(false)))

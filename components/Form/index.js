@@ -8,9 +8,9 @@ class Form extends Component {
 
   componentDidMount() {
     const { selected } = this.props;
-    if (selected) {
-      this.setState({ value: this.props.selected })
-    }
+    // if (selected) {
+    //   this.setState({ value: this.props.selected })
+    // }
   }
 
   handleChange = e => {
