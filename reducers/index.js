@@ -27,7 +27,8 @@ const selected = (state = '', action) => {
   switch (action.type) {
     case constants.SELECT_ITEM:
       return action.payload
-
+    case constants.DESELECT_ITEM:
+      return '';
     default:
       return '';
   }

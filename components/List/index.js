@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { removeDuplicates } from '../../helpers';
-import { selectItem } from '../../actions';
+import { selectItem, deselectItem } from '../../actions';
 
 const List = (props) => {
   const { zip = [], setValue, selected, dispatch, isFetching } = props;
@@ -13,7 +13,11 @@ const List = (props) => {
         uniqueStates.map(({ postCode, placeName, stateAbbreviation }) => (
           <li
             key={postCode}
-            onClick={(e) => dispatch(selectItem(postCode))}
+            onClick={
+              (e) => {
+                (selected !== postCode) ? dispatch(selectItem(postCode)) : dispatch(deselectItem())
+              }
+            }
             className={selected === postCode ? 'item selected' : 'item'}>{placeName}, {stateAbbreviation}</li>
         ))
       }

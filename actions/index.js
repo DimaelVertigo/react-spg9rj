@@ -40,3 +40,10 @@ export const selectItem = data => {
     payload: data
   };
 };
+
+export const deselectItem = data => {
+  return {
+    type: constants.DESELECT_ITEM,
+    payload: data
+  };
+};
