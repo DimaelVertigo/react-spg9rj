@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import { connect, Provider } from 'react-redux';
@@ -6,10 +5,9 @@ import store from './store';
 import './style.css';
 import Form from './components/Form';
 import List from './components/List';
-import { selectedItem } from './actions';
 import JSONTree from 'react-json-tree';
 
-/** 
+/**
  * example valid zipcodes
  * 93455
  * 93454
@@ -27,18 +25,18 @@ import JSONTree from 'react-json-tree';
 
 class App extends React.Component {
   render() {
-    const { zip, isFetching } = this.props;
+    const { zip } = this.props;
     return (
       <div>
         <JSONTree data={this.props} />
         <Form />
         {<List zip={zip} />}
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = ({ zip, isFetching, selected }) => ({ zip, isFetching, selected })
+const mapStateToProps = ({ zip, isFetching, selected }) => ({ zip, isFetching, selected });
 const Root = connect(mapStateToProps)(App);
 
 ReactDOM.render(
