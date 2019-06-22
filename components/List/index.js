@@ -10,11 +10,11 @@ const List = (props) => {
   return (
     <ul>
       {
-        zip.map(({ postCode, state, stateAbbreviation }) => (
+        uniqueStates.map(({ postCode, placeName, stateAbbreviation }) => (
           <li
             key={postCode}
             onClick={(e) => dispatch(selectItem(postCode))}
-            className={selected === postCode ? 'item selected' : 'item'}>{state}, {stateAbbreviation}</li>
+            className={selected === postCode ? 'item selected' : 'item'}>{placeName}, {stateAbbreviation}</li>
         ))
       }
     </ul>

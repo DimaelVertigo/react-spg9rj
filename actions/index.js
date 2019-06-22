@@ -13,13 +13,14 @@ export const fetchData = zip => {
     return fetch(api)
       .then(response => response.json())
       .then(json => {
+        console.log(json)
         const postCode = json['post code'];
         const stateAbbreviation = json.places[0]['state abbreviation'];
-        const state = json.places[0]['state'];
+        const placeName = json.places[0]['place name'];
         const cutedData = {
           postCode,
           stateAbbreviation,
-          state
+          placeName
         }
         return dispatch(addZip(cutedData))
       })

@@ -7,6 +7,13 @@ import { connect } from 'react-redux';
 class Form extends Component {
   state = { value: '' };
 
+  componentDidMount() {
+    const {selected} = this.props;
+    if (selected) {
+      this.setState({value: this.props.selected})
+    }
+  }
+
   handleChange = e => {
     this.setState({
       value: e.target.value
