@@ -23,7 +23,9 @@ class Form extends Component {
   handleSubmit = e => {
     const { value } = this.state;
     e.preventDefault();
-    value && this.props.dispatch(fetchData(this.state.value));
+    if (value && !isNaN(value)) {
+      this.props.dispatch(fetchData(this.state.value));
+    }
     this.setState({ value: '' });
   }
 
@@ -39,7 +41,7 @@ class Form extends Component {
             name='zipcode'
             value={this.state.value}
             onChange={this.handleChange}
-            onFocus={() => this.setState({value: ''})}
+            
           />
         </label>
         <input type="submit" value="go" />
