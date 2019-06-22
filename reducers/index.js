@@ -1,8 +1,5 @@
-const constants = {
-  ADD_ZIP: 'ADD_ZIP',
-  FETCHING: 'FETCHING',
-  SELECT_ITEM: 'SELECT_ITEM'
-}
+
+import constants from '../constants';
 
 const initialState = [];
 
@@ -27,7 +24,7 @@ const isFetching = (state = false, action) => {
   }
 };
 
-const selected = (state = [], action) => {
+const selected = (state = '', action) => {
   switch (action.type) {
     case constants.SELECT_ITEM:
       return action.payload;

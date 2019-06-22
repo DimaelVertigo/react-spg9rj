@@ -1,8 +1,4 @@
-const constants = {
-  ADD_ZIP: 'ADD_ZIP',
-  FETCHING: 'FETCHING',
-  SELECT_ITEM: 'SELECT_ITEM'
-}
+import constants from '../constants';
 
 export const fetchData = zip => {
   return dispatch => {

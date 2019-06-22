@@ -27,6 +27,7 @@ class Form extends Component {
     this.setState({ value: '' });
   }
 
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -38,6 +39,7 @@ class Form extends Component {
             name='zipcode'
             value={this.state.value}
             onChange={this.handleChange}
+            onFocus={() => this.setState({value: ''})}
           />
         </label>
         <input type="submit" value="go" />
