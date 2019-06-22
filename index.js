@@ -3,11 +3,13 @@ import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import { connect, Provider } from 'react-redux';
 import store from './store';
-import JSONTree from 'react-json-tree';
+import { selectedItem } from './actions';
+
+
 import './style.css';
-import {removeDuplicates} from './helpers';
-import {fetchData} from './actions';
-// import List from './components/List';
+
+import Form from './components/Form';
+import List from './components/List';
 /** 
  * example valid zipcodes
  * 93455
@@ -24,68 +26,26 @@ import {fetchData} from './actions';
 //   .then(res => res.json())
 //   .then(res => console.log(res.places[0]))
 
-const List = ({ zip = [], setValue, selected }) => {
-  const uniqueStates = removeDuplicates(zip, 'code');
-  
-  return (
-    <ul>
-      {
-        uniqueStates.map(({code, state, name}) => (
-          <li 
-          key={code} 
-          onClick={(e) => setValue(code, e)}
-          className={ selected ===  code ? 'item selected' : 'item'}>{name}, {state}</li>
-        ))
-      }
-    </ul>
-  )
-}
 class App extends React.Component {
   state = { value: '' };
 
-  handleChange = e => {
-    this.setState({
-      value: e.target.value
-    })
-  }
-
-  handleSubmit = e => {
-    const { value } = this.state;
-    e.preventDefault();
-    value && this.props.dispatch(fetchData(this.state.value));
-    // this.props.dispatch(fetchData(90210));
-    this.setState({ value: '' });
-  }
-
-  handleSet = (value, e) => {
-    console.log(e.target)
+  handleSet = (event, value) => {
     this.setState({ value })
+    // this.props.dispatch(selectedItem(this.state.value))
   }
-
+  
   render() {
     const { zip, isFetching } = this.props;
     return (
       <div>
-        <JSONTree data={this.props} invertTheme={false} />
-        <JSONTree data={this.state} invertTheme={false} />
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <input
-              type='text'
-              name='zipcode'
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-          </label>
-          <input type="submit" value="go" />
-        </form>
+        <Form value={this.state.value}/>
         {!isFetching && <List zip={zip} setValue={this.handleSet} />}
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ zip, isFetching }) => ({ zip, isFetching })
+const mapStateToProps = ({ zip, isFetching, selected }) => ({ zip, isFetching, selected })
 const Root = connect(mapStateToProps)(App);
 
 ReactDOM.render(

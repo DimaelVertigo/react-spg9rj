@@ -1,10 +1,11 @@
-import actions from '../actions';
 const constants = {
   ADD_ZIP: 'ADD_ZIP',
-  FETCHING: 'FETCHING'
+  FETCHING: 'FETCHING',
+  SELECT_ITEM: 'SELECT_ITEM'
 }
 
 const initialState = [];
+
 const zip = (state = initialState, action) => {
   switch (action.type) {
     case constants.ADD_ZIP:
@@ -24,9 +25,19 @@ const isFetching = (state = false, action) => {
     default:
       return false;
   }
-}
+};
+
+const selected = (state = [], action) => {
+  switch (action.type) {
+    case constants.SELECT_ITEM:
+      return action.payload;
+    default:
+      return false;
+  }
+};
+
 
 export default {
-  zip, isFetching
+  zip, isFetching, selected
 }
 

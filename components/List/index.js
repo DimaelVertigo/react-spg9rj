@@ -1,25 +1,28 @@
 import React from 'react';
-import {removeDuplicates} from '../../helpers';
+import { connect } from 'react-redux';
+import { removeDuplicates } from '../../helpers';
+import {selectItem} from '../../actions';
 
-const List = ({ zip = [], setValue, selected }) => {
-
+const List = (props) => {
+  const { zip = [], setValue, selected, dispatch } = props;
   const uniqueStates = removeDuplicates(zip, 'code');
-  
+  console.log(uniqueStates)
   return (
     <ul>
       {
-        zip.map(({code, state, name}) => (
-          <li 
-          key={code} 
-          onClick={(e) => setValue(code, e)}
-          className={ selected ===  code ? 'item selected' : 'item'}>{name}, {state}</li>
+        zip.map(({ postCode, state, stateAbbreviation }) => (
+          <li
+            key={postCode}
+            onClick={(e) => dispatch(selectItem(postCode))}
+            className={selected === postCode ? 'item selected' : 'item'}>{state}, {stateAbbreviation}</li>
         ))
       }
     </ul>
   )
 }
 
-export default List;
+const mapStateToProps = ({ zip, isFetching, selected }) => ({ zip, isFetching, selected });
+export default connect(mapStateToProps)(List);
 
 
 
