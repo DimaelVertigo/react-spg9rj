@@ -1,4 +1,3 @@
-
 import constants from '../constants';
 
 const initialState = [];
@@ -24,7 +23,7 @@ const isFetching = (state = false, action) => {
   }
 };
 
-const selected = (state = '', action) => {
+const selected = (state = null, action) => {
   switch (action.type) {
     case constants.SELECT_ITEM:
       return action.payload;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { removeDuplicates } from '../../helpers';
-import {selectItem} from '../../actions';
+import { selectItem } from '../../actions';
 
 const List = (props) => {
   const { zip = [], setValue, selected, dispatch } = props;
