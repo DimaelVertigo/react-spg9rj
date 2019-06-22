@@ -8,7 +8,7 @@ const List = ({ zip = [], setValue, selected }) => {
   return (
     <ul>
       {
-        uniqueStates.map(({code, state, name}) => (
+        zip.map(({code, state, name}) => (
           <li 
           key={code} 
           onClick={(e) => setValue(code, e)}
