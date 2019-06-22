@@ -23,12 +23,13 @@ const isFetching = (state = false, action) => {
   }
 };
 
-const selected = (state = null, action) => {
+const selected = (state = '', action) => {
   switch (action.type) {
     case constants.SELECT_ITEM:
-      return action.payload;
+      return action.payload
+
     default:
-      return false;
+      return '';
   }
 };
 

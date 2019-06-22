@@ -3,13 +3,12 @@ import React, { Component } from 'react';
 import ReactDOM, { render } from 'react-dom';
 import { connect, Provider } from 'react-redux';
 import store from './store';
-import { selectedItem } from './actions';
-
-
 import './style.css';
-
 import Form from './components/Form';
 import List from './components/List';
+import { selectedItem } from './actions';
+import JSONTree from 'react-json-tree';
+
 /** 
  * example valid zipcodes
  * 93455
@@ -27,19 +26,13 @@ import List from './components/List';
 //   .then(res => console.log(res.places[0]))
 
 class App extends React.Component {
-  state = { value: '' };
-
-  handleSet = (event, value) => {
-    this.setState({ value })
-    // this.props.dispatch(selectedItem(this.state.value))
-  }
-  
   render() {
     const { zip, isFetching } = this.props;
     return (
       <div>
-        <Form value={this.state.value}/>
-        {!isFetching && <List zip={zip} setValue={this.handleSet} />}
+        <JSONTree data={this.props} />
+        <Form />
+        {<List zip={zip} />}
       </div>
     )
   }

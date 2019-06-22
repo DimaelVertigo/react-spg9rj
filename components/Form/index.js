@@ -1,45 +1,39 @@
 import React, { Component } from 'react';
-import JSONTree from 'react-json-tree';
 import { removeDuplicates } from './helpers';
-import { fetchData } from '../../actions';
+import { fetchData, selectItem } from '../../actions';
 import { connect } from 'react-redux';
 
 class Form extends Component {
   state = { value: '' };
 
   componentDidMount() {
-    const {selected} = this.props;
+    const { selected } = this.props;
     if (selected) {
-      this.setState({value: this.props.selected})
+      this.setState({ value: this.props.selected })
     }
   }
 
   handleChange = e => {
-    this.setState({
-      value: e.target.value
-    })
+    const { value } = e.target;
+    !isNaN(value) && this.props.dispatch(selectItem(value))
   }
 
   handleSubmit = e => {
-    const { value } = this.state;
+    const { selected, dispatch } = this.props;
     e.preventDefault();
-    if (!isNaN(value)) {
-      this.props.dispatch(fetchData(this.state.value));
+    if (!isNaN(selected)) {
+      dispatch(fetchData(selected));
     }
-    this.setState({ value: '' });
   }
-
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <JSONTree data={this.props} invertTheme={false} />
-        <JSONTree data={this.state} invertTheme={false} />
         <label>
           <input
             type='text'
             name='zipcode'
-            value={this.state.value}
+            value={this.props.selected}
             onChange={this.handleChange}
           />
         </label>
@@ -49,5 +43,5 @@ class Form extends Component {
   }
 }
 
-const mapStateToProps = ({ zip, isFetching, selected }) => ({ zip, isFetching, selected });
+const mapStateToProps = ({ selected }) => ({ selected });
 export default connect(mapStateToProps)(Form);

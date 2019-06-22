@@ -4,7 +4,7 @@ import { removeDuplicates } from '../../helpers';
 import { selectItem } from '../../actions';
 
 const List = (props) => {
-  const { zip = [], setValue, selected, dispatch } = props;
+  const { zip = [], setValue, selected, dispatch, isFetching } = props;
   const uniqueStates = removeDuplicates(zip, 'postCode');
 
   return (
@@ -12,7 +12,7 @@ const List = (props) => {
       {
         uniqueStates.map(({ postCode, placeName, stateAbbreviation }) => (
           <li
-            key={postCode + Math.random()}
+            key={postCode}
             onClick={(e) => dispatch(selectItem(postCode))}
             className={selected === postCode ? 'item selected' : 'item'}>{placeName}, {stateAbbreviation}</li>
         ))
